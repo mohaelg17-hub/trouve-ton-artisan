@@ -1,0 +1,27 @@
+@use "../../styles/variables" as *;
+
+.site-header {
+  background-color: $color-light;
+  border-bottom: 1px solid $color-primary;
+
+  &__logo {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: $color-dark-blue;
+    text-decoration: none;
+  }
+
+  &__nav ul li a {
+    color: $color-dark;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &__search {
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,35 @@
+@use "../../styles/variables" as *;
+
+.site-footer {
+  background-color: $color-dark;
+  color: white;
+  margin-top: auto;
+
+  &__title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: $color-primary;
+  }
+
+  &__subtitle {
+    color: $color-light;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  ul li a,
+  address a {
+    color: white;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  address {
+    font-style: normal;
+    line-height: 1.6;
+  }
+}

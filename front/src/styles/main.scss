@@ -1,0 +1,11 @@
+
+@use "variables" as *;
+@import "fonts";
+
+$primary: $color-primary;
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+body {
+  font-family: 'Graphik', sans-serif;
+}
