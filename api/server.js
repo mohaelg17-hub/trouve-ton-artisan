@@ -1,25 +1,30 @@
 const express = require('express');
 const cors = require('cors');
+const helmet = require('helmet');
 require('dotenv').config();
 const { sequelize } = require('./models');
-const categorieRoutes = require('./routes/categorieRoutes'); 
-const artisanRoutes = require('./routes/artisanRoutes'); 
+const categorieRoutes = require('./routes/categorieRoutes');
+const artisanRoutes = require('./routes/artisanRoutes');
 const contactRoutes = require('./routes/contactRoutes');
 
 const app = express();
-app.use(cors());
-app.use(express.json()); 
-app.use('/api/artisans', artisanRoutes);    
-app.use('/api/contact', contactRoutes);
 
+const corsOptions = {
+  origin: 'http://localhost:5173',
+};
+
+app.use(helmet());
+app.use(cors(corsOptions));
+app.use(express.json());
+
+app.use('/api/categories', categorieRoutes);
+app.use('/api/artisans', artisanRoutes);
+app.use('/api/contact', contactRoutes);
 
 // Route de test simple
 app.get('/', (req, res) => {
   res.send('API Trouve ton artisan – ça fonctionne !');
 });
-
-// Routes de l'API
-app.use('/api/categories', categorieRoutes); // ← nouvelle ligne
 
 const PORT = process.env.PORT || 3001;
 

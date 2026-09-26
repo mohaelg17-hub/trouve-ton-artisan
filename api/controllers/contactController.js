@@ -1,5 +1,6 @@
 const { Artisan } = require('../models');
 const transporter = require('../config/mailer');
+const validator = require('validator');
 
 exports.sendContactMessage = async (req, res) => {
   try {
@@ -7,6 +8,14 @@ exports.sendContactMessage = async (req, res) => {
 
     if (!nom || !email || !objet || !message) {
       return res.status(400).json({ message: 'Tous les champs sont obligatoires.' });
+    }
+
+    if (!validator.isEmail(email)) {
+      return res.status(400).json({ message: "L'adresse email n'est pas valide." });
+    }
+
+    if (nom.length > 100 || objet.length > 200 || message.length > 2000) {
+      return res.status(400).json({ message: 'Un ou plusieurs champs dépassent la longueur autorisée.' });
     }
 
     const artisan = await Artisan.findByPk(req.params.id);
