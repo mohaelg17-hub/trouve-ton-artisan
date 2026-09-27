@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Header.scss';
 
 function Header() {
   const [categories, setCategories] = useState([]);
+  const [recherche, setRecherche] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get('http://localhost:3001/api/categories')
@@ -15,6 +17,13 @@ function Header() {
         console.error('Erreur lors de la récupération des catégories :', error);
       });
   }, []);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (recherche.trim() !== '') {
+      navigate(`/artisans?recherche=${encodeURIComponent(recherche)}`);
+    }
+  };
 
   return (
     <header className="site-header">
@@ -34,12 +43,14 @@ function Header() {
           </ul>
         </nav>
 
-        <form className="site-header__search d-flex" role="search">
+        <form className="site-header__search d-flex" role="search" onSubmit={handleSearchSubmit}>
           <input
             type="search"
             className="form-control"
             placeholder="Rechercher un artisan..."
             aria-label="Rechercher un artisan"
+            value={recherche}
+            onChange={(e) => setRecherche(e.target.value)}
           />
           <button className="btn btn-primary" type="submit">
             Rechercher

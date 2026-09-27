@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Helmet } from 'react-helmet-async';
 
 function ArtisanDetail() {
   const { id } = useParams();
@@ -32,6 +33,11 @@ function ArtisanDetail() {
 
   return (
     <div className="container py-4">
+      <Helmet>
+        <title>{artisan.nom} – Trouve ton artisan !</title>
+        <meta name="description" content={`Contactez ${artisan.nom}, ${artisan.Specialite?.nom} à ${artisan.ville}.`} />
+      </Helmet>
+
       <h1>{artisan.nom}</h1>
       <p>{artisan.Specialite?.nom} — {artisan.ville}</p>
       <p>Note : {artisan.note} / 5</p>
