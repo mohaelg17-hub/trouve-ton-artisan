@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
+import api from '../../api';
 
 function ArtisanDetail() {
   const { id } = useParams();
@@ -10,7 +10,7 @@ function ArtisanDetail() {
   const [statut, setStatut] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:3001/api/artisans/${id}`)
+    api.get(`/api/artisans/${id}`)
       .then((response) => setArtisan(response.data))
       .catch((error) => console.error(error));
   }, [id]);
@@ -21,7 +21,7 @@ function ArtisanDetail() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`http://localhost:3001/api/contact/${id}`, formData)
+    api.post(`/api/contact/${id}`, formData)
       .then(() => {
         setStatut('success');
         setFormData({ nom: '', email: '', objet: '', message: '' });

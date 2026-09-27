@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './Header.scss';
 import logo from '../../assets/Logo.png';
+import api from '../../api';
 
 function Header() {
   const [categories, setCategories] = useState([]);
@@ -10,7 +10,7 @@ function Header() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/categories')
+    api.get('/api/categories')
       .then((response) => {
         setCategories(response.data);
       })
@@ -29,9 +29,9 @@ function Header() {
   return (
     <header className="site-header">
       <div className="container d-flex align-items-center justify-content-between py-3">
-        
+
         <Link to="/" className="site-header__logo">
-        <img src={logo} alt="Trouve ton artisan !" height="120" />
+          <img src={logo} alt="Trouve ton artisan !" height="120" />
         </Link>
 
         <nav className="site-header__nav">

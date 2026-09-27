@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
 import ArtisanCard from '../../components/ArtisanCard/ArtisanCard';
 import { Helmet } from 'react-helmet-async';
+import api from '../../api';
 
 function ArtisanList() {
   const [artisans, setArtisans] = useState([]);
@@ -12,7 +12,7 @@ function ArtisanList() {
     const categorie = searchParams.get('categorie');
     const recherche = searchParams.get('recherche');
 
-    axios.get('http://localhost:3001/api/artisans', {
+    api.get('/api/artisans', {
       params: { categorie, recherche },
     })
       .then((response) => {
@@ -24,13 +24,13 @@ function ArtisanList() {
   }, [searchParams]);
 
   return (
+    <>
+      <Helmet>
+        <title>Liste des artisans – Trouve ton artisan !</title>
+        <meta name="description" content="Parcourez la liste des artisans de la région Auvergne-Rhône-Alpes, filtrez par catégorie ou recherchez par nom." />
+      </Helmet>
 
-    <><Helmet>
-      <title>Liste des artisans – Trouve ton artisan !</title>
-      <meta name="description" content="Parcourez la liste des artisans de la région Auvergne-Rhône-Alpes, filtrez par catégorie ou recherchez par nom." />
-    </Helmet>
-    
-    <div className="container py-4">
+      <div className="container py-4">
         <h1>Liste des artisans</h1>
         <div className="row g-3">
           {artisans.map((artisan) => (
@@ -39,7 +39,8 @@ function ArtisanList() {
             </div>
           ))}
         </div>
-      </div></>
+      </div>
+    </>
   );
 }
 

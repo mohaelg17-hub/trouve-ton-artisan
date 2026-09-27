@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import ArtisanCard from '../../components/ArtisanCard/ArtisanCard';
 import { Helmet } from 'react-helmet-async';
+import api from '../../api';
 
 function Home() {
   const [artisansDuMois, setArtisansDuMois] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3001/api/artisans', {
+    api.get('/api/artisans', {
       params: { top: true },
     })
       .then((response) => setArtisansDuMois(response.data))
@@ -15,13 +15,13 @@ function Home() {
   }, []);
 
   return (
-    <><Helmet>
-      <title>Trouve ton artisan ! Accueil</title>
-      <meta name="description" content="Trouvez facilement un artisan près de chez vous en Auvergne-Rhône-Alpes : bâtiment, services, fabrication, alimentation." />
-    </Helmet>
+    <>
+      <Helmet>
+        <title>Trouve ton artisan ! Accueil</title>
+        <meta name="description" content="Trouvez facilement un artisan près de chez vous en Auvergne-Rhône-Alpes : bâtiment, services, fabrication, alimentation." />
+      </Helmet>
 
-    <div className="container py-4">
-        {/* Rubrique explicative */}
+      <div className="container py-4">
         <section className="mb-5">
           <h1>Comment trouver mon artisan ?</h1>
           <ol className="list-unstyled">
@@ -40,7 +40,6 @@ function Home() {
           </ol>
         </section>
 
-        {/* Artisans du mois */}
         <section>
           <h2>Les artisans du mois</h2>
           <div className="row g-3">
@@ -51,8 +50,8 @@ function Home() {
             ))}
           </div>
         </section>
-
-      </div></>
+      </div>
+    </>
   );
 }
 
