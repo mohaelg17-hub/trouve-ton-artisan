@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Header.scss';
+import logo from '../../assets/Logo.png';
 
 function Header() {
   const [categories, setCategories] = useState([]);
@@ -30,7 +31,7 @@ function Header() {
       <div className="container d-flex align-items-center justify-content-between py-3">
         
         <Link to="/" className="site-header__logo">
-          Trouve ton artisan !
+        <img src={logo} alt="Trouve ton artisan !" height="120" />
         </Link>
 
         <nav className="site-header__nav">
