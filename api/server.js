@@ -11,7 +11,11 @@ const contactRoutes = require('./routes/contactRoutes');
 const app = express();
 
 const corsOptions = {
-  origin: ['http://localhost:5173', 'https://trouve-ton-artisan-ten-eosin.vercel.app/'],
+  origin: [
+    'http://localhost:5173',
+    'https://trouve-ton-artisan-ten-eosin.vercel.app',
+    'https://trouve-ton-artisan-72b7snrs5-moha-6ef.vercel.app',
+  ],
 };
 
 const limiter = rateLimit({
